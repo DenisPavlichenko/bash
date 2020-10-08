@@ -1,0 +1,11 @@
+role=""
+password=""
+host=""
+port=""
+database=""
+url="postgresql://$role:$password@$host:$port/$database"
+dir='/tmp/NAMEkdb_$(date +"%Y-%m-%d_%H_%M_%S").gz'
+command="docker exec -t postgres-db pg_dump $url | gzip > $dir"
+echo "$command" > "$PWD"/backup-db.sh
+chmod +x "$PWD"/backup-db.sh
+(crontab -l; echo "0 * * * * export PATH=$PATH; $PWD/backup-db.sh") | crontab
