@@ -1,0 +1,10 @@
+#!/bin/bash
+
+user=$(whoami)
+input=/home/$user/Pictures #копируем папку пиктурес 
+output=/home/denis/home1111$(date +%Y-%m-%d_%H%M%S).tar.gz #копируем сюда в папку с именем home1111
+
+
+tar -czf $output $input
+echo "Backup of $input completed"
+ls -l $output
